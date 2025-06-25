@@ -1,0 +1,14 @@
+{
+  "$schema": "https://unpkg.com/jsrepo@2.3.3/schemas/project-config.json",
+  "repos": ["https://reactbits.dev/default/"],
+  "includeTests": false,
+  "watermark": true,
+  "configFiles": {},
+  "paths": {
+    "*": "./src/app/text.tsx",
+    "Animations": "./src/app/animation",
+    "Backgrounds": "./src/app/backgrounds",
+    "Components": "./src/app/comp",
+    "TextAnimations": "./src/app/text.tsx"
+  }
+}

@@ -1,103 +1,277 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
+import SplashCursor from "./animation/SplashCursor/SplashCursor";
+import Stack from "./comp/Stack/Stack";
+import { workData } from "./data/work";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import { ResumeCard } from "./components/ResumeCard";
+import { RevealOnScroll } from "@/components/reveal-on-scroll";
+import { StaggeredReveal } from "@/components/staggered-reveal";
+
+const handleAnimationComplete = () => {
+  console.log("All letters have animated!");
+};
+
+const images = [
+  {
+    id: 1,
+    img: "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
+  },
+  {
+    id: 2,
+    img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
+  },
+  {
+    id: 3,
+    img: "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
+  },
+  {
+    id: 4,
+    img: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
+  },
+];
+
+const skills = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "C++",
+  "PHP",
+  "Dart",
+  "Angular",
+  "React",
+  "Next.js",
+  "Flutter",
+  "Ionic",
+  "Tailwind",
+  "Node.js",
+  "Express",
+  "MySQL",
+  "SQL Lite",
+  "Firebase",
+  "Git",
+  "Figma",
+  "Photoshop",
+  "Adobe Ilustrator",
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="px-4 py-10 bg-black text-[#dcdcdc] text-[14px] sm:text-[15px]">
+      <SplashCursor />
+      <div className="max-w-xl mx-auto leading-relaxed">
+        {/* Hero Section */}
+        <div className="flex flex-col md:flex-row items-center mt-10 justify-between gap-10 w-full">
+          <div className="md:w-3/4 w-full">
+            <h1 className="text-5xl font-semibold mb-4">
+              <span className="font-bold cursor-default select-none"></span>
+            </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <RevealOnScroll animation="slideUp" delay={200} triggerOnce={false}>
+              <p className="text-lg mb-5 cursor-default select-none text-gray-600">
+                Full Stack Developer. I love designing websites and turning them
+                into code with passion & precision. I turn ideas into
+                pixel-perfect experiences.
+              </p>
+            </RevealOnScroll>
+          </div>
+
+          <RevealOnScroll animation="scale" delay={300} triggerOnce={false}>
+            <div className="md:w-1/4 w-full flex justify-center">
+              <Stack
+                randomRotation={true}
+                sensitivity={180}
+                sendToBackOnClick={false}
+                cardDimensions={{ width: 150, height: 150 }}
+                cardsData={images}
+              />
+            </div>
+          </RevealOnScroll>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        {/* About Section */}
+        <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
+          <section className="mb-10 cursor-default select-none">
+            <h2 className="text-lg font-bold mb-2 cursor-default select-none">
+              About
+            </h2>
+            <p className="mb-3">
+              I'm a web developer who's obsessed with visuals and design — not
+              just making things work, but making them{" "}
+              <em className="font-semibold">wew</em>. I recently finished my
+              internship at{" "}
+              <span className="font-semibold">Zettabyte Pte Ltd</span> as a
+              front-end developer & software tester.
+            </p>
+            <p>
+              I graduated from{" "}
+              <strong className="font-semibold">UPN Veteran Yogyakarta</strong>{" "}
+              and have always been passionate about digital experiences that
+              connect with people.
+            </p>
+          </section>
+        </RevealOnScroll>
+
+        {/* Work Experience Section */}
+        <section id="work">
+          <div className="flex mb-5 min-h-0 flex-col gap-y-3">
+            <RevealOnScroll animation="slideUp" triggerOnce={false}>
+              <h2 className="text-xl font-bold">Work Experience</h2>
+            </RevealOnScroll>
+
+            {/* Setiap ResumeCard dengan animasi bergantian kiri-kanan */}
+            {workData.map((work, index) => (
+              <ResumeCard
+                key={work.company}
+                index={index}
+                logoUrl={work.logoUrl}
+                altText={work.company}
+                title={work.company}
+                subtitle={work.title}
+                href={work.href}
+                badges={work.badges}
+                period={`${work.start} - ${work.end ?? "Present"}`}
+                description={work.description}
+              />
+            ))}
+          </div>
+        </section>
+
+        {/* Education Section */}
+        <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
+          <section className="mb-10 cursor-default select-none">
+            <h2 className="text-lg font-bold mb-2">Education</h2>
+            <div>
+              <strong className="font-semibold">UPN Veteran Yogyakarta</strong>
+              <br />
+              Bachelor's Degree in Information Technology
+            </div>
+          </section>
+        </RevealOnScroll>
+
+        {/* Skills Section */}
+        <RevealOnScroll animation="slideUp" delay={150} triggerOnce={false}>
+          <section className="mb-10 cursor-default select-none">
+            <h2 className="text-lg font-bold mb-3">Skills</h2>
+            <StaggeredReveal
+              staggerDelay={30}
+              animation="scale"
+              className="flex flex-wrap gap-2"
+              triggerOnce={false}
+            >
+              {skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="bg-white text-black px-2 py-1 rounded text-xs font-medium"
+                >
+                  {skill}
+                </span>
+              ))}
+            </StaggeredReveal>
+          </section>
+        </RevealOnScroll>
+
+        {/* Projects Section */}
+        <RevealOnScroll animation="slideUp" delay={200} triggerOnce={false}>
+          <section className="mb-12 cursor-default select-none">
+            <h2 className="text-2xl font-bold mb-1 text-center">
+              Check out my latest works
+            </h2>
+            <p className="text-center text-gray-600 text-sm mb-6">Projects</p>
+
+            <StaggeredReveal
+              staggerDelay={200}
+              animation="slideUp"
+              className="grid gap-6 sm:grid-cols-2"
+              triggerOnce={false}
+            >
+              <div className="border rounded-xl p-4 shadow-sm">
+                <Image
+                  src="/todowy.png"
+                  alt="Todowy Project"
+                  width={500}
+                  height={280}
+                  className="rounded-md mb-3"
+                />
+                <h3 className="font-semibold text-sm mb-1">Still Proggress</h3>
+                <p className="text-xs text-gray-500 mb-2">2024 – 2025</p>
+                <p className="text-sm mb-3">Sorry This View is</p>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
+                    React
+                  </span>
+                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
+                    Tailwind
+                  </span>
+                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
+                    Still Proggress
+                  </span>
+                </div>
+              </div>
+
+              <div className="border rounded-xl p-4 shadow-sm">
+                <Image
+                  src="/omnifood.jpg"
+                  alt="Omnifood Project"
+                  width={500}
+                  height={280}
+                  className="rounded-md mb-3"
+                />
+                <h3 className="font-semibold text-sm mb-1">Still Proggress</h3>
+                <p className="text-xs text-gray-500 mb-2">2024</p>
+                <p className="text-sm mb-3">On Proggress</p>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
+                    HTML
+                  </span>
+                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
+                    CSS
+                  </span>
+                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
+                    JavaScript
+                  </span>
+                </div>
+              </div>
+            </StaggeredReveal>
+          </section>
+        </RevealOnScroll>
+
+        {/* Footer */}
+        <RevealOnScroll animation="fade" delay={300} triggerOnce={false}>
+          <footer className="mt-12 text-center text-xs text-gray-400">
+            <p className="mb-2">Built with 💻 and ☕ by Nadira Nur Wiradatya</p>
+            <StaggeredReveal
+              staggerDelay={100}
+              animation="slideUp"
+              className="flex justify-center gap-4"
+              triggerOnce={false}
+            >
+              <Link
+                href="https://linkedin.com/in/nadiranurwiradatya"
+                target="_blank"
+                className="text-gray-600 hover:text-black transition"
+              >
+                LinkedIn
+              </Link>
+              <Link
+                href="https://github.com/nadiranuwiradatya22"
+                target="_blank"
+                className="text-gray-600 hover:text-black transition"
+              >
+                GitHub
+              </Link>
+              <Link
+                href="https://instagram.com/aryana.dira"
+                target="_blank"
+                className="text-gray-600 hover:text-black transition"
+              >
+                Instagram
+              </Link>
+            </StaggeredReveal>
+          </footer>
+        </RevealOnScroll>
+      </div>
+    </main>
   );
 }
