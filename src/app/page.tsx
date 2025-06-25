@@ -4,7 +4,7 @@ import Link from "next/link";
 import SplashCursor from "./animation/SplashCursor/SplashCursor";
 import Stack from "./comp/Stack/Stack";
 import { workData } from "./data/work";
-import { BlurFade } from "@/components/magicui/blur-fade";
+
 import { ResumeCard } from "./components/ResumeCard";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { StaggeredReveal } from "@/components/staggered-reveal";
