@@ -4,31 +4,33 @@ import Link from "next/link";
 import SplashCursor from "./animation/SplashCursor/SplashCursor";
 import Stack from "./comp/Stack/Stack";
 import { workData } from "./data/work";
-
+import { ScrollVelocity } from "./text.tsx/ScrollVelocity/ScrollVelocity";
 import { ResumeCard } from "./components/ResumeCard";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { StaggeredReveal } from "@/components/staggered-reveal";
+import { SparklesText } from "@/app/comp/spark";
 
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
 };
+const velocity = 100; // atau angka lain sesuai kecepatan scroll yang kamu mau
 
 const images = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format",
+    img: "/cardheader/image4header.jpg",
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1449844908441-8829872d2607?q=80&w=500&auto=format",
+    img: "/cardheader/image2header.jpg",
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1452626212852-811d58933cae?q=80&w=500&auto=format",
+    img: "/cardheader/image3header.jpg",
   },
   {
     id: 4,
-    img: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=500&auto=format",
+    img: "/cardheader/image1header.png",
   },
 ];
 
@@ -64,10 +66,11 @@ export default function Home() {
         {/* Hero Section */}
         <div className="flex flex-col md:flex-row items-center mt-10 justify-between gap-10 w-full">
           <div className="md:w-3/4 w-full">
+            <SparklesText>Hello Im Nadira</SparklesText>
+
             <h1 className="text-5xl font-semibold mb-4">
               <span className="font-bold cursor-default select-none"></span>
             </h1>
-
             <RevealOnScroll animation="slideUp" delay={200} triggerOnce={false}>
               <p className="text-lg mb-5 cursor-default select-none text-gray-600">
                 Full Stack Developer. I love designing websites and turning them
@@ -83,13 +86,12 @@ export default function Home() {
                 randomRotation={true}
                 sensitivity={180}
                 sendToBackOnClick={false}
-                cardDimensions={{ width: 150, height: 150 }}
+                cardDimensions={{ width: 170, height: 170 }}
                 cardsData={images}
               />
             </div>
           </RevealOnScroll>
         </div>
-
         {/* About Section */}
         <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
           <section className="mb-10 cursor-default select-none">
@@ -112,7 +114,6 @@ export default function Home() {
             </p>
           </section>
         </RevealOnScroll>
-
         {/* Work Experience Section */}
         <section id="work">
           <div className="flex mb-5 min-h-0 flex-col gap-y-3">
@@ -137,7 +138,6 @@ export default function Home() {
             ))}
           </div>
         </section>
-
         {/* Education Section */}
         <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
           <section className="mb-10 cursor-default select-none">
@@ -149,7 +149,6 @@ export default function Home() {
             </div>
           </section>
         </RevealOnScroll>
-
         {/* Skills Section */}
         <RevealOnScroll animation="slideUp" delay={150} triggerOnce={false}>
           <section className="mb-10 cursor-default select-none">
@@ -171,15 +170,14 @@ export default function Home() {
             </StaggeredReveal>
           </section>
         </RevealOnScroll>
-
+        <ScrollVelocity
+          texts={["Project", "Documentation"]}
+          velocity={velocity}
+          className="custom-scroll-text"
+        />
         {/* Projects Section */}
         <RevealOnScroll animation="slideUp" delay={200} triggerOnce={false}>
-          <section className="mb-12 cursor-default select-none">
-            <h2 className="text-2xl font-bold mb-1 text-center">
-              Check out my latest works
-            </h2>
-            <p className="text-center text-gray-600 text-sm mb-6">Projects</p>
-
+          <section className="mb-12 cursor-default select-none mt-12">
             <StaggeredReveal
               staggerDelay={200}
               animation="slideUp"
@@ -236,10 +234,10 @@ export default function Home() {
             </StaggeredReveal>
           </section>
         </RevealOnScroll>
-
         {/* Footer */}
+        <div style={{ height: "60px", position: "relative" }}></div>
         <RevealOnScroll animation="fade" delay={300} triggerOnce={false}>
-          <footer className="mt-12 text-center text-xs text-gray-400">
+          <footer className=" text-center text-xs text-gray-400">
             <p className="mb-2">Built with 💻 and ☕ by Nadira Nur Wiradatya</p>
             <StaggeredReveal
               staggerDelay={100}
