@@ -253,7 +253,7 @@ export default function Home() {
                 LinkedIn
               </Link>
               <Link
-                href="https://github.com/nadiranuwiradatya22"
+                href="https://github.com/nadiranurwiradatya22"
                 target="_blank"
                 className="text-gray-600 hover:text-black transition"
               >
