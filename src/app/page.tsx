@@ -1,11 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import SplashCursor from "./animation/SplashCursor/SplashCursor";
 import Stack from "./comp/Stack/Stack";
 import { workData } from "./data/work";
 import { ScrollVelocity } from "./text.tsx/ScrollVelocity/ScrollVelocity";
 import { ResumeCard } from "./components/ResumeCard";
+import ProjectModal from "./projectmodals";
 import { RevealOnScroll } from "@/components/reveal-on-scroll";
 import { StaggeredReveal } from "@/components/staggered-reveal";
 import { SparklesText } from "@/app/comp/spark";
@@ -13,57 +15,111 @@ import { SparklesText } from "@/app/comp/spark";
 const handleAnimationComplete = () => {
   console.log("All letters have animated!");
 };
-const velocity = 100; // atau angka lain sesuai kecepatan scroll yang kamu mau
+const velocity = 100;
 
 const images = [
-  {
-    id: 1,
-    img: "/cardheader/image4header.jpg",
-  },
-  {
-    id: 2,
-    img: "/cardheader/image2header.jpg",
-  },
-  {
-    id: 3,
-    img: "/cardheader/image3header.jpg",
-  },
-  {
-    id: 4,
-    img: "/cardheader/image1header.png",
-  },
+  { id: 1, img: "/cardheader/image4header.jpg" },
+  { id: 2, img: "/cardheader/image2header.jpg" },
+  { id: 3, img: "/cardheader/image3header.jpg" },
+  { id: 4, img: "/cardheader/image1header.png" },
 ];
 
 const skills = [
+  "Figma",
+  "Usability Testing",
+  "Information Architecture",
   "HTML",
   "CSS",
   "JavaScript",
-  "C++",
-  "PHP",
-  "Dart",
-  "Angular",
-  "React",
-  "Next.js",
-  "Flutter",
-  "Ionic",
   "Tailwind",
   "Node.js",
   "Express",
   "MySQL",
-  "SQL Lite",
-  "Firebase",
-  "Git",
-  "Figma",
-  "Photoshop",
-  "Adobe Ilustrator",
+  "SDLC",
+  "Testing",
+  "Angular",
 ];
 
+// DATA PROYEK BARU DENGAN DETAIL LENGKAP
+const projectData = [
+  {
+    id: 1,
+    name: "Bjong Ngopi - Multi-Device System",
+    date: "Sep 2025 – Nov 2025",
+    imgSrc: "/bjong-ngopi-image.jpg",
+    shortDescription: "Merancang 3 sistem (Admin, POS, Pelanggan) di 3 perangkat. Validasi: 90% Admin/POS, 88% Pelanggan.",
+    fullDescription: "Proyek ini adalah tantangan kompleks merancang tiga sistem terpisah yang beroperasi mulus di tiga perangkat berbeda (Laptop untuk Admin, Tablet untuk POS/Kasir, dan HP untuk Pelanggan). Desain ini berhasil menyederhanakan end-to-end flow bisnis kedai kopi.",
+    tags: ["Figma/Prototyping", "Usability Testing", "Design Thinking", "Multi-Platform"],
+    link: "https://shorturl.at/wCETD",
+    results: ["Admin/POS Usability Score: 90%", "Customer Usability Score: 88%", "Simplifikasi End-to-End Business Flow."],
+  },
+  {
+    id: 2,
+    name: "Pertamina Internship Attendance UI/UX",
+    date: "Oktober 2025",
+    imgSrc: "/pertamina-attendance-image.jpg",
+    shortDescription: "Mendesain sistem presensi untuk HR & Interns. Solusi ini berhasil mencapai Usability Score tervalidasi sebesar 92/100.",
+    fullDescription: "Fokus utama adalah menyederhanakan alur presensi wajib yang kompleks di lingkungan korporat besar untuk Staf HR dan Interns. Validasi yang ketat menghasilkan desain yang terbukti sangat efisien.",
+    tags: ["Figma", "UX Research", "Prototyping", "Corporate System"],
+    link: "https://shorturl.at/71tK1",
+    results: ["Overall Usability Score: 92/100", "Streamlining HR and Intern flow", "Development-ready prototype."],
+  },
+  {
+    id: 3,
+    name: "MoneyLab Sneakers - Dual Usability",
+    date: "Mar 2025 – Sep 2025",
+    imgSrc: "/moneylab-sneakers-image.jpg",
+    shortDescription: "Mencapai Usability Score 100% (Admin) dan 88.12% (Customer). Fokus pada riset UX dan akurasi desain ke produksi.",
+    fullDescription: "Proyek e-commerce yang melibatkan riset UX mendalam untuk mendiagnosis 3 pain points kritis. Berhasil mencapai skor validasi ganda yang tinggi, membuktikan efektivitas desain baik dari sisi operasional maupun konsumen.",
+    tags: ["Figma", "UX Research", "Blade Templating", "E-commerce"],
+    link: "https://shorturl.at/3mpG5",
+    results: ["Admin Usability Score: 100%", "Customer Usability Score: 88.12%", "Solving 3 critical user pain points."],
+  },
+  {
+    id: 4,
+    name: "Dikpora Kota Yogyakarta - Data Multi-Level",
+    date: "April 2025",
+    imgSrc: "/dikpora-yogyakarta-image.jpg",
+    shortDescription: "Merampingkan alur data 5 acara multi-level. Output: 40+ aset UI high-fidelity yang menjadi cetak biru pengembangan.",
+    fullDescription: "Studi kasus tentang skala: mendesain sistem untuk menyederhanakan alur kerja administrasi yang melibatkan data kompleks dari 5 acara multi-level (POPDA, O2SN, dll.). Outputnya adalah 40+ aset high-fidelity yang memandu pengembangan.",
+    tags: ["Information Architecture", "Figma", "Stakeholder Mapping", "Public Sector"],
+    link: "https://shorturl.at/YbEu7",
+    results: ["40+ High-Fidelity UI Assets delivered", "Streamlined end-to-end operational flow", "Mapped 5 multi-level event data flows."],
+  },
+  {
+    id: 5,
+    name: "Zetta Bytes Ltd - SDLC & Testing Optimization",
+    date: "Feb 2024 – May 2024",
+    imgSrc: "/zetta-bytes-image.jpg",
+    shortDescription: "Mengoptimalkan alur Bug Reporting, berkontribusi pada penyederhanaan identifikasi defect hingga 15%.",
+    fullDescription: "Internship yang berfokus pada perbaikan alur testing dan bug reporting dalam SDLC nyata. Berhasil menyederhanakan identifikasi defect hingga 15%, dan memberi pemahaman mendalam tentang Angular dan Graphql.",
+    tags: ["SDLC", "Testing", "Angular Basics", "Bug Reporting"],
+    link: null,
+    results: ["Simplified defect identification flow by 15%", "Improved product quality through better testing flow", "Gained experience with Angular and Graphql."],
+  },
+];
+
+
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<typeof projectData[number] | null>(null);
+
+  const openModal = (project: typeof projectData[number]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
   return (
     <main className="px-4 py-10 bg-black text-[#dcdcdc] text-[14px] sm:text-[15px]">
       <SplashCursor />
-      <div className="max-w-xl mx-auto leading-relaxed">
-        {/* Hero Section */}
+      {/* wider container so grid can breathe on larger screens */}
+      <div className="max-w-5xl mx-auto leading-relaxed">
+        {/* Hero Section ... (Unchanged) */}
         <div className="flex flex-col md:flex-row items-center mt-10 justify-between gap-10 w-full">
           <div className="md:w-3/4 w-full">
             <SparklesText>Hello Im Nadira</SparklesText>
@@ -92,7 +148,7 @@ export default function Home() {
             </div>
           </RevealOnScroll>
         </div>
-        {/* About Section */}
+        {/* About Section ... (Unchanged) */}
         <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
           <section className="mb-10 cursor-default select-none">
             <h2 className="text-lg font-bold mb-2 cursor-default select-none">
@@ -114,14 +170,12 @@ export default function Home() {
             </p>
           </section>
         </RevealOnScroll>
-        {/* Work Experience Section */}
+        {/* Work Experience Section ... (Unchanged) */}
         <section id="work">
           <div className="flex mb-5 min-h-0 flex-col gap-y-3">
             <RevealOnScroll animation="slideUp" triggerOnce={false}>
               <h2 className="text-xl font-bold">Work Experience</h2>
             </RevealOnScroll>
-
-            {/* Setiap ResumeCard dengan animasi bergantian kiri-kanan */}
             {workData.map((work, index) => (
               <ResumeCard
                 key={work.company}
@@ -138,7 +192,7 @@ export default function Home() {
             ))}
           </div>
         </section>
-        {/* Education Section */}
+        {/* Education Section ... (Unchanged) */}
         <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
           <section className="mb-10 cursor-default select-none">
             <h2 className="text-lg font-bold mb-2">Education</h2>
@@ -149,7 +203,7 @@ export default function Home() {
             </div>
           </section>
         </RevealOnScroll>
-        {/* Skills Section */}
+        {/* Skills Section ... (Unchanged) */}
         <RevealOnScroll animation="slideUp" delay={150} triggerOnce={false}>
           <section className="mb-10 cursor-default select-none">
             <h2 className="text-lg font-bold mb-3">Skills</h2>
@@ -175,66 +229,59 @@ export default function Home() {
           velocity={velocity}
           className="custom-scroll-text"
         />
-        {/* Projects Section */}
+        {/* Projects Section - UPDATED TO USE STATE AND MODAL */}
         <RevealOnScroll animation="slideUp" delay={200} triggerOnce={false}>
           <section className="mb-12 cursor-default select-none mt-12">
+            <h2 className="text-xl font-bold mb-4">Selected Projects</h2>
             <StaggeredReveal
               staggerDelay={200}
               animation="slideUp"
-              className="grid gap-6 sm:grid-cols-2"
+              className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
               triggerOnce={false}
             >
-              <div className="border rounded-xl p-4 shadow-sm">
-                <Image
-                  src="/todowy.png"
-                  alt="Todowy Project"
-                  width={500}
-                  height={280}
-                  className="rounded-md mb-3"
-                />
-                <h3 className="font-semibold text-sm mb-1">Still Proggress</h3>
-                <p className="text-xs text-gray-500 mb-2">2024 – 2025</p>
-                <p className="text-sm mb-3">Sorry This View is</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
-                    React
-                  </span>
-                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
-                    Tailwind
-                  </span>
-                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
-                    Still Proggress
-                  </span>
+              {projectData.map((project) => (
+                <div
+                  key={project.id}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openModal(project);
+                    }
+                  }}
+                  onClick={() => openModal(project)}
+                  className="border rounded-xl p-4 shadow-sm hover:border-[#0070f3] hover:shadow-lg transition cursor-pointer flex flex-col h-full"
+                >
+                  <div className="w-full mb-3 overflow-hidden rounded-md">
+                    <Image
+                      src={project.imgSrc}
+                      alt={project.name}
+                      width={800}
+                      height={450}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="w-full h-44 sm:h-48 md:h-56 object-cover"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-sm mb-1">{project.name}</h3>
+                    <p className="text-xs text-gray-400 mb-2">{project.date}</p>
+                    <p className="text-sm mb-3">{project.shortDescription}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 text-xs mt-3">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="bg-gray-200 text-black px-2 py-1 rounded text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
-              <div className="border rounded-xl p-4 shadow-sm">
-                <Image
-                  src="/omnifood.jpg"
-                  alt="Omnifood Project"
-                  width={500}
-                  height={280}
-                  className="rounded-md mb-3"
-                />
-                <h3 className="font-semibold text-sm mb-1">Still Proggress</h3>
-                <p className="text-xs text-gray-500 mb-2">2024</p>
-                <p className="text-sm mb-3">On Proggress</p>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
-                    HTML
-                  </span>
-                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
-                    CSS
-                  </span>
-                  <span className="bg-gray-200 text-black px-2 py-1 rounded">
-                    JavaScript
-                  </span>
-                </div>
-              </div>
+              ))}
             </StaggeredReveal>
           </section>
         </RevealOnScroll>
-        {/* Footer */}
+        
+        {/* Footer ... (Unchanged) */}
         <div style={{ height: "60px", position: "relative" }}></div>
         <RevealOnScroll animation="fade" delay={300} triggerOnce={false}>
           <footer className=" text-center text-xs text-gray-400">
@@ -270,6 +317,11 @@ export default function Home() {
           </footer>
         </RevealOnScroll>
       </div>
+
+      {/* RENDER MODAL DI BAWAH SEMUA CONTENT */}
+      {isModalOpen && selectedProject && (
+        <ProjectModal project={selectedProject} onClose={closeModal} />
+      )}
     </main>
   );
 }
