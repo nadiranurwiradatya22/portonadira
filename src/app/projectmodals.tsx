@@ -78,13 +78,14 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
         <div className="grid gap-6 md:grid-cols-2 p-4 sm:p-5 border-t border-white/6">
           <div>
             <div className="rounded-lg overflow-hidden border border-white/6">
-              <Image
-                src={project.imgSrc || "/placeholder.png"}
-                alt={project.name}
-                width={1200}
-                height={700}
-                className="w-full h-44 sm:h-56 md:h-64 object-cover"
-              />
+              <div className="relative w-full aspect-video">
+                <Image
+                  src={project.imgSrc || "/placeholder.png"}
+                  alt={project.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
             </div>
             <div className="mt-3">
               <div className="flex flex-wrap gap-2">
