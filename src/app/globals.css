@@ -8,9 +8,8 @@
   :root {
   }
 
-  @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
+  @theme inline {;
+    --color-foreground: #000000;
     --font-sans: var(--font-sans);
   }
 
@@ -24,7 +23,7 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
+  --color-background: #000000;
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);

@@ -46,7 +46,7 @@ const projectData = [
     id: 1,
     name: "Pertamina Internship Attendance UI/UX",
     date: "Oktober 2025",
-    imgSrc: "/images/projects/pertamina.png",
+    imgSrc: "/images/projects/pertamina.webp",
     shortDescription:
       "Mendesain sistem presensi untuk HR & Interns. Solusi ini berhasil mencapai Usability Score tervalidasi sebesar 92/100.",
     fullDescription:
@@ -63,7 +63,7 @@ const projectData = [
     id: 2,
     name: "MoneyLab Sneakers - Dual Usability",
     date: "Mar 2025 – Sep 2025",
-    imgSrc: "/images/projects/moneylabs.png",
+    imgSrc: "/images/projects/moneylabs.webp",
     shortDescription:
       "Mencapai Usability Score 100% (Admin) dan 88.12% (Customer). Fokus pada riset UX dan akurasi desain ke produksi.",
     fullDescription:
@@ -80,7 +80,7 @@ const projectData = [
     id: 3,
     name: "Dikpora Kota Yogyakarta - Data Multi-Level",
     date: "April 2025",
-    imgSrc: "/images/projects/dikpora.png",
+    imgSrc: "/images/projects/dikpora.webp",
     shortDescription:
       "Merampingkan alur data 5 acara multi-level. Output: 40+ aset UI high-fidelity yang menjadi cetak biru pengembangan.",
     fullDescription:
@@ -97,7 +97,7 @@ const projectData = [
     id: 4,
     name: "Bjong Ngopi - Multi-Device System",
     date: "Sep 2025 – Nov 2025",
-    imgSrc: "/images/projects/bjongngopi.png",
+    imgSrc: "/images/projects/bjongngopi.webp",
     shortDescription:
       "Merancang 3 sistem (Admin, POS, Pelanggan) di 3 perangkat. Validasi: 90% Admin/POS, 88% Pelanggan.",
     fullDescription:
@@ -147,9 +147,9 @@ export default function Home() {
     <main className="px-4 py-10 bg-black text-[#dcdcdc] text-[14px] sm:text-[15px]">
       <SplashCursor />
       {/* wider container so grid can breathe on larger screens */}
-      <div className="max-w-5xl mx-auto leading-relaxed">
+      <div className="max-w-5xl bg-b;ack mx-auto leading-relaxed">
         {/* Hero Section ... (Unchanged) */}
-        <div className="flex flex-col md:flex-row items-center mt-10 justify-between gap-10 w-full">
+        <div className="flex flex-col md:flex-row items-center mt-10 justify-between gap-10 w-full mb-8 md:mb-12">
           <div className="md:w-3/4 w-full">
             <SparklesText>Hello Im Nadira</SparklesText>
 
@@ -158,9 +158,7 @@ export default function Home() {
             </h1>
             <RevealOnScroll animation="slideUp" delay={200} triggerOnce={false}>
               <p className="text-lg mb-5 cursor-default select-none text-gray-600">
-                Full Stack Developer. I love designing websites and turning them
-                into code with passion & precision. I turn ideas into
-                pixel-perfect experiences.
+                I believe the best design is design that is implementable and delivers tangible impact. When you are looking for a UI/UX designer who not only produces compelling visual mockups but also understands the underlying code architecture, I am the right fit. Drawing on my experience as a Full Stack Developer, I craft solutions that are realistic, efficient, and minimize the gap between design and development.
               </p>
             </RevealOnScroll>
           </div>
@@ -177,29 +175,6 @@ export default function Home() {
             </div>
           </RevealOnScroll>
         </div>
-        {/* About Section ... (Unchanged) */}
-        <RevealOnScroll animation="slideUp" delay={100} triggerOnce={false}>
-          <section className="mb-10 cursor-default select-none">
-            <h2 className="text-lg font-bold mb-2 cursor-default select-none">
-              About
-            </h2>
-            <p className="mb-3">
-              I'm a web developer who's obsessed with visuals and design — not
-              just making things work, but making them{" "}
-              <em className="font-semibold">wew</em>. I recently finished my
-              internship at{" "}
-              <span className="font-semibold">Zettabyte Pte Ltd</span> as a
-              front-end developer & software tester.
-            </p>
-            <p>
-              I graduated from{" "}
-              <strong className="font-semibold">UPN Veteran Yogyakarta</strong>{" "}
-              and have always been passionate about digital experiences that
-              connect with people.
-            </p>
-          </section>
-        </RevealOnScroll>
-        {/* Work Experience Section ... (Unchanged) */}
         <section id="work">
           <div className="flex mb-5 min-h-0 flex-col gap-y-3">
             <RevealOnScroll animation="slideUp" triggerOnce={false}>
@@ -280,45 +255,24 @@ export default function Home() {
                     }
                   }}
                   onClick={() => openModal(project)}
-                  // parent perspective for subtle 3D
-                  style={{ perspective: 1000 }}
                   className="group"
                 >
                   <div
-                    className="relative rounded-xl overflow-hidden bg-black/75 border border-white/8 shadow-lg transition-transform duration-300 transform-gpu will-change-transform
-                               group-hover:-translate-y-2 group-hover:scale-105 group-hover:rotate-1"
-                    style={{ transformStyle: "preserve-3d" }}
+                    className="relative rounded-xl overflow-hidden bg-black/70 border border-white/6
+                               transition-transform duration-180 transform will-change-transform hover:-translate-y-1 hover:scale-103"
                   >
-                    {/* depth shadow */}
-                    <div className="absolute inset-0 pointer-events-none -z-10 transition-all duration-300
-                                    shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)]" />
-
-                    {/* content */}
                     <div className="p-4 flex flex-col min-h-[220px]">
-                      <div className="w-full mb-3 overflow-hidden rounded-md">
+                      <div className="w-full mb-4 sm:mb-3 overflow-hidden rounded-md">
                         <div className="relative w-full aspect-video">
                           <Image
                             src={project.imgSrc}
                             alt={project.name}
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-103"
+                            className="object-cover transition-transform duration-200 ease-out group-hover:scale-103"
                           />
-                          {/* subtle glass layer to add depth */}
-                          <div className="absolute inset-0 bg-white/3 backdrop-blur-sm opacity-0 group-hover:opacity-10 transition duration-300" />
-
-                          {/* long diagonal glossy sweep */}
-                          <div
-                            className="absolute -left-40 top-0 h-full w-40 bg-gradient-to-r from-white/60 via-white/20 to-white/0
-                                       opacity-0 blur-sm transform -skew-x-12 rotate-12 transition-all duration-900
-                                       group-hover:opacity-70 group-hover:translate-x-[160%]"
-                          />
-
-                          {/* circular specular highlight */}
-                          <div
-                            className="absolute right-4 top-4 w-12 h-12 rounded-full bg-white/20 blur-sm opacity-0 transform scale-75 transition duration-400
-                                       group-hover:opacity-85 group-hover:scale-110"
-                          />
+                          {/* lightweight sheen: opacity overlay only */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-white/6 to-transparent opacity-0 group-hover:opacity-18 transition-opacity duration-200 pointer-events-none" />
                         </div>
                       </div>
 
@@ -336,12 +290,9 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-
-                    {/* glossy rim highlight for edge reflection */}
-                    <div className="absolute inset-0 pointer-events-none rounded-xl ring-1 ring-white/6 shadow-inner" />
                   </div>
                 </div>
-               ))}
+              ))}
             </StaggeredReveal>
           </section>
         </RevealOnScroll>
